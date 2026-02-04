@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Feliz San Valentín Mi Amor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 500px;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #d63384;
+        }
+
+        .subtitle {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .photo-container {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #d63384;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CARTA */
+        .letter {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: shake 2s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .letter.open {
+            animation: none;
+        }
+
+        .letter-text {
+            display: none;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* CORAZONES */
+        .heart-fall {
+            position: fixed;
+            top: -20px;
+            font-size: 16px;
+            color: #ff6b81;
+            animation: fall-heart linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes fall-heart {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        /* SOBRE */
+        .envelope-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 120px;
+        }
+
+        /* SOBRE */
+        .envelope-real {
+            width: 360px;
+            height: 230px;
+            background: #f4f1ee;
+            position: relative;
+            border-radius: 3px;
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.25),
+                inset 0 0 0 1px rgba(0,0,0,0.08);
+            cursor: pointer;
+            animation: envelopeShake 3s infinite ease-in-out;
+        }
+
+        .envelope-real.open {
+            animation: none;
+        }
+
+        /* SOLAPA */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e9e4df;
+            clip-path: polygon(0 0, 100% 0, 50% 55%);
+            transform-origin: top;
+            transition: transform 1s ease;
+            z-index: 5;
+        }
+
+        .envelope-real.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        /* CUERPO */
+        .envelope-body {
+            width: 100%;
+            height:100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* PAPEL */
+        .letter-paper {
+            position: absolute;
+            bottom: -100%;
+            left: 10px;
+            width: calc(100% - 20px);
+            max-height: 200px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border-radius: 2px;
+            transition: bottom 1.2s ease;
+            overflow-y: auto; 
+        }
+
+        .envelope-real.open .letter-paper {
+            bottom: 20px;
+        }
+
+        /* TEXTO */
+        #letter-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-line;
+        }
+
+        @keyframes envelopeShake {
+            0%   { transform: rotate(5deg); }
+            25%  { transform: rotate(0.10deg); }
+            50%  { transform: rotate(-0.10deg); }
+            75%  { transform: rotate(0.10eg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        .envelope-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 70px;
+            color: #d62828;
+            z-index: 6;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        /* 🔥 SOLO cuando se abre desaparece */
+        .envelope-real.open .envelope-heart {
+            opacity: 0;
+        }
+
+        .photo-container {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #d63384;
+            position: relative;
+            background: #fff;
+        }
+
+        .photo-slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .photo-slider img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        .photo-slider img.active {
+            opacity: 1;
+        }
+        
+        /* 🔒 PANTALLA BLOQUEO */
+        .lock-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .lock-romantic {
+            text-align: center;
+            transform: scale(0.9);
+            animation: lockShake 10s infinite ease-in-out;
+        }
+
+        .lock-shackle {
+            width: 170px;
+            height: 150px;
+            border: 10px solid #ccc;
+            border-bottom: none;
+            border-radius: 60px 60px 0 0;
+            margin: 0 auto -10px;
+            background: linear-gradient(to right, #eee, #aaa);
+        }
+
+        .lock-body {
+            background: linear-gradient(to right, #f5f5f5, #cfcfcf);
+            padding: 80px 10px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .digits {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+        }
+
+        .digit {
+            width: 42px;
+            height: 60px;
+            background: #111;
+            color: #ff6b81;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+            transition: transform 0.15s;
+        }
+
+        .digit:active {
+            transform: translateY(3px);
+        }
+
+        #unlockBtn {
+            margin-top: 20px;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: none;
+            background: #d63384;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .hint {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        @keyframes lockShake {
+            0%   { transform: rotate(0deg); }
+            20%  { transform: rotate(0.8deg); }
+            40%  { transform: rotate(-0.8deg); }
+            60%  { transform: rotate(0.6deg); }
+            80%  { transform: rotate(-0.6deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .questions-box {
+            margin: 50px auto;
+            max-width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .questions-box h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .question button {
+            margin: 5px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 50px;
+            background: #d63384;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .question button:hover {
+            background: #b62d6f;
+        }
+
+        /* VIDEO */
+        .video-box {
+            margin: 40px auto;
+            max-width: 500px;
+        }
+
+        .video-box video {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-romantic">
+            <h1 class="title">Secreto</h1>
+            <div class="lock-shackle"></div>
+
+            <div class="lock-body">
+                <p class="subtitle">solo nosotros sabemos ❤️</p>
+                <div class="digits">
+                    <div class="digit" data-index="0">0</div>
+                    <div class="digit" data-index="1">0</div>
+                    <div class="digit" data-index="2">0</div>
+                    <div class="digit" data-index="3">0</div>
+                    <div class="digit" data-index="4">0</div>
+                    <div class="digit" data-index="5">0</div>
+                </div>
+            </div>
+
+            <button id="unlockBtn">🔓 Abrir</button>
+            <p class="hint">Pisa los digitos para cambiar</p>
+        </div>
+    </div>
+
+    <div id="mainContent" class="hidden">
+        <div class="container">
+            <h1 class="title">¡Feliz san valentin !</h1>
+            <p class="subtitle">Para la persona más especial de mi vida 💖</p>
+
+            <!-- FOTO -->
+            <div class="photo-container">
+                <div class="photo-slider">
+                    <img src="https://traveler.marriott.com/es/wp-content/uploads/sites/2/2023/02/GI-482140447-Couple-Beach-1920x1080.jpg" class="active">
+                    <img src="https://cdn0.bodas.net/article/4491/3_2/960/jpg/91944-shutterstock-2018256725.jpeg">
+                    <img src="https://blog.voyovoy.com.mx/wp-content/uploads/2023/12/que-hacer-en-san-valentin.jpg">
+                    <img src="https://thumbs.dreamstime.com/b/besar-la-playa-y-el-amor-de-pareja-en-una-cita-para-d%C3%ADa-san-valent%C3%ADn-aniversario-o-vacaciones-rom%C3%A1nticas-verano-con-cielo-claro-255895014.jpg">
+                </div>
+            </div>
+
+            <p class="title">Con mucho amor te dedico este mensaje</p>
+
+            <div class="envelope-wrapper">
+                <div class="envelope-real" id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-heart">❤</div>
+
+                    <div class="envelope-body">
+                        <div class="letter-paper" id="letter-paper">
+                            <p id="letter-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="subtitle">Dale click al sobre</p>
+            
+            <div class="questions-box" id="questionsBox">
+                <h2>Antes de continuar… 💕</h2>
+
+                <div class="question active">
+                    <p>¿Me quieres hoy más que ayer? ❤️</p>
+                    <button onclick="answerQuestion()">Sí</button>
+                    <button onclick="answerQuestion()">No</button>
+                </div>
+
+                <div class="question">
+                    <p>¿Te imaginas un futuro conmigo? ✨</p>
+                    <button onclick="answerQuestion()">Sí</button>
+                    <button onclick="answerQuestion()">No</button>
+                </div>
+
+                <div class="question">
+                    <p>¿Abrirías tu corazón una y otra vez por mí? 💖</p>
+                    <button onclick="answerQuestion()">Sí</button>
+                    <button onclick="answerQuestion()">No</button>
+                </div>
+            </div>
+
+            <!-- VIDEO FINAL -->
+            <div class="video-box hidden" id="videoBox">
+                <video id="loveVideo" controls autoplay>
+                    <source src="https://monje122.github.io/net/net.mp4" type="video/mp4">
+                    Tu navegador no soporta video
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop>
+        <source src="https://monje122.github.io/romantic/hany.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 💕 Corazones cayendo
+        function createHearts() {
+            const heartCount = 30;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-fall';
+                heart.innerHTML = '❤';
+
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 10 + 12) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 6000);
+            }
+        }
+
+        setInterval(createHearts, 8000);
+        createHearts();
+
+        // 💌 Carta con escritura automática
+        const envelope = document.getElementById('envelope');
+        const letterText = document.getElementById('letter-text');
+
+        const message = `Feliz San Valentín, mi amor 🤍
+
+Desde que llegaste a mi vida, todo cambió de la forma más bonita.
+Aprendí que el amor no solo se dice, se siente…
+en cada mirada, en cada risa compartida, en cada momento a tu lado.
+
+Gracias por ser mi lugar seguro,
+mi calma en los días difíciles
+y mi sonrisa en los días felices.
+
+Hoy y siempre, te elijo a ti.
+Porque contigo, el amor no es una promesa:
+es una realidad que vivo cada día.
+
+Te amo más de lo que las palabras pueden explicar. ❤️`;
+
+        let index = 0;
+        let opened = false;
+
+        envelope.addEventListener('click', () => {
+            if (opened) return;
+            opened = true;
+
+            envelope.classList.add('open');
+
+            const typing = setInterval(() => {
+                letterText.textContent += message[index];
+                index++;
+                if (index >= message.length) clearInterval(typing);
+            }, 45);
+        });
+
+        const photos = document.querySelectorAll('.photo-slider img');
+        let currentPhoto = 0;
+
+        setInterval(() => {
+            photos[currentPhoto].classList.remove('active');
+            currentPhoto = (currentPhoto + 1) % photos.length;
+            photos[currentPhoto].classList.add('active');
+        }, 3000); // cambia cada 3 segundos
+
+        const correctCode = "230125"; // ❤️ CÓDIGO SECRETO
+        const digits = document.querySelectorAll('.digit');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const lockScreen = document.getElementById('lockScreen');
+        const mainContent = document.getElementById('mainContent');
+
+        // girar números
+        digits.forEach(digit => {
+            digit.addEventListener('click', () => {
+                let num = parseInt(digit.textContent);
+                num = (num + 1) % 10;
+                digit.textContent = num;
+            });
+        });
+
+        function getCurrentCode() {
+            return Array.from(digits).map(d => d.textContent).join('');
+        }
+
+        // explosión de corazones
+        function heartExplosion() {
+            for (let i = 0; i < 120; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.fontSize = Math.random() * 20 + 14 + 'px';
+                heart.style.color = '#d62828';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '10000';
+
+                const x = (Math.random() - 0.5) * 400;
+                const y = (Math.random() - 0.5) * 400;
+
+                heart.style.transition = 'transform 1.5s ease, opacity 1.5s ease';
+                document.body.appendChild(heart);
+
+                requestAnimationFrame(() => {
+                    heart.style.transform = `translate(${x}px, ${y}px)`;
+                    heart.style.opacity = '0';
+                });
+
+                setTimeout(() => heart.remove(), 1500);
+            }
+        }
+
+        unlockBtn.addEventListener('click', () => {
+            if (getCurrentCode() === correctCode) {
+                heartExplosion();
+                // 🎶 INICIAR MÚSICA
+                const bgMusic = document.getElementById('bgMusic');
+                bgMusic.play().catch(() => {});
+                
+                setTimeout(() => {
+                    lockScreen.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                }, 1200);
+            } else {
+                digits.forEach(d => d.style.color = '#ff0000');
+                setTimeout(() => digits.forEach(d => d.style.color = '#ff6b81'), 600);
+            }
+        });
+
+        let currentQuestion = 0;
+        const questions = document.querySelectorAll('.question');
+        const videoBox = document.getElementById('videoBox');
+        const questionsBox = document.getElementById('questionsBox');
+
+        function answerQuestion() {
+            questions[currentQuestion].classList.remove('active');
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+                questions[currentQuestion].classList.add('active');
+            } else {
+                questionsBox.style.display = 'none';
+                videoBox.classList.remove('hidden');
+            }
+        }
+
+        const loveVideo = document.getElementById('loveVideo');
+
+        // Cuando el video empieza → apagar música
+        loveVideo.addEventListener('play', () => {
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic && !bgMusic.paused) {
+                bgMusic.pause();
+            }
+        });
+    </script>
+</body>
+</html>
