@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        * {
+       * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -213,29 +213,31 @@ body {
 }
 
 .photo-container {
-    margin: 20px auto;
-    width: 100%;
-    max-width: 350px;
-    height: 350px;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 4px solid #b32800;
-    position: relative;
+    margin: 30px auto;
+    width: 280px;
+    height: 360px;
     background: #fff;
+    padding: 15px 15px 45px; /* más espacio abajo */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    border-radius: 6px;
+    position: relative;
 }
+
 
 .photo-slider {
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .photo-slider img {
     position: absolute;
     inset: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 30px);
     object-fit: cover;
+    border-radius: 2px;
     opacity: 0;
     transition: opacity 1.2s ease;
 }
@@ -391,6 +393,16 @@ body {
 .hidden {
     display: none;
 }
+.polaroid-text {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #555;
+}
     </style>
 </head>
 <body>
@@ -420,7 +432,7 @@ body {
     <div id="mainContent" class="hidden">
         <div class="container">
             <h1 class="title">¡Feliz san valentin !</h1>
-            <p class="subtitle">Para la persona más especial de mi vida 💖</p>
+            <p class="subtitle">Para la persona más especial de mi vida </p>
 
             <!-- FOTO -->
             <div class="photo-container">
@@ -430,6 +442,7 @@ body {
                     <img src="https://blog.voyovoy.com.mx/wp-content/uploads/2023/12/que-hacer-en-san-valentin.jpg">
                     <img src="https://thumbs.dreamstime.com/b/besar-la-playa-y-el-amor-de-pareja-en-una-cita-para-d%C3%ADa-san-valent%C3%ADn-aniversario-o-vacaciones-rom%C3%A1nticas-verano-con-cielo-claro-255895014.jpg">
                 </div>
+                <p class="polaroid-text">Nuestros momentos ❤️</p>
             </div>
 
             <p class="title">Con mucho amor te dedico este mensaje</p>
@@ -450,7 +463,7 @@ body {
             <p class="subtitle">Dale click al sobre</p>
             
             <div class="questions-box" id="questionsBox">
-                <h2>Antes de continuar… 💕</h2>
+                <h2>Antes de continuar… </h2>
 
                 <div class="question active">
                     <p>¿Me quieres hoy más que ayer? ❤️</p>
